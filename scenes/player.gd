@@ -1,7 +1,7 @@
 extends Area2D
 
 
-# Player Specific Information
+# Player Specific Informa
 @export var current_speed = 200
 var walk_speed = 200
 var run_speed = 400
@@ -25,12 +25,13 @@ func change_sword_position(direction: bool):
   if direction:
     var new_x_pos = (player_animation.position.x + 15)
     sword_sprite.set_position(Vector2(new_x_pos, sword_sprite.get_position().y))
+    sword_sprite.set_rotation(160.0)
 
   # Facing Right
   else:
     var new_x_pos = (player_animation.position.x - 15)
     sword_sprite.set_position(Vector2(new_x_pos, sword_sprite.get_position().y))
-
+    sword_sprite.set_rotation(-160.0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,17 +59,21 @@ func _process(delta):
   # Player sprinting
   if Input.is_action_pressed("run"):
     current_speed = run_speed
-    player_animation.speed_scale = 1.5
-
+  # $AnimatedSprite2D.speed_scale = 1.5
+  player_animation.speed_scale = 1.5
   if Input.is_action_just_released("run"):
     current_speed = walk_speed
     player_animation.speed_scale = 1.00
+  # $AnimatedSprite2D.speed_scale = 1.00
+  
 
   # When the player has stopped pressing buttons/moving
   if velocity.length() > 0:
     velocity = velocity.normalized() * current_speed
+  # $AnimatedSprite2D.play()
     player_animation.play()
   else:
+  # $AnimatedSprite2D.stop()
     player_animation.stop()
 
   position += velocity * delta
