@@ -13,7 +13,7 @@ func _process(delta):
 
 func _on_play_button_pressed():
 	print("Play was pressed")
-	# get_tree().set_current_scene("res://scenes/main.tscn")
+	get_tree().change_scene("res://scenes/main.tscn")
 
 
 func _on_quit_pressed():
