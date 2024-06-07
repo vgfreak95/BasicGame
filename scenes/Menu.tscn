@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bugw2sjuaia8g"]
+
+[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_p3y4d"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_p3y4d")
+
+[node name="PlayButton" type="Button" parent="."]
+texture_filter = 2
+offset_left = 71.0
+offset_top = 47.0
+offset_right = 348.0
+offset_bottom = 113.0
+text = "Play Game"
+
+[node name="Quit" type="Button" parent="."]
+texture_filter = 2
+offset_left = 72.0
+offset_top = 141.0
+offset_right = 349.0
+offset_bottom = 207.0
+text = "Quit Game"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

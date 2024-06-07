@@ -1,75 +1,60 @@
 extends Area2D
 
-
-# Player Specific Information
-@export var current_speed = 200
+# Player Specific Informa
+var current_speed = 200
 var walk_speed = 200
 var run_speed = 400
 var screen_size
-var is_sword_changed = false
-@onready var player_animation = $AnimatedPlayer2D
+var direction = 1
 
-
-# Sword Specific Information
-@onready var sword_sprite = $SpriteSword2D 
- 
-func flip_horizontal(direction: bool):
-  var nodes_to_flip = [player_animation, sword_sprite]
-
-  for node in nodes_to_flip:
-    node.flip_h = direction
-
-func change_sword_position(direction: bool):
-  
-  # Facing Left
-  if direction:
-    var new_x_pos = (player_animation.position.x + 15)
-    sword_sprite.set_position(Vector2(new_x_pos, sword_sprite.get_position().y))
-
-  # Facing Right
-  else:
-    var new_x_pos = (player_animation.position.x - 15)
-    sword_sprite.set_position(Vector2(new_x_pos, sword_sprite.get_position().y))
+@onready var player = $AnimatedPlayer2D
+@onready var collision = $CollisionShape2D
+@onready var player_attributes = $AttributesComponent
+@onready var weapon_sword = $WeaponSword
+@onready var weapon_animation = $WeaponSword/AnimationPlayer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  screen_size = get_viewport_rect().size
+	screen_size = get_viewport_rect().size
+	print(player_attributes.attributes)
+	# weapon.change_weapon_position(get_position(), direction)
+
 
 func _process(delta):
-  var velocity = Vector2.ZERO
+	var velocity = Vector2.ZERO
 
-  # Processing user input
-  if Input.is_action_pressed("move_down"):
-    velocity.y += 1
-  if Input.is_action_pressed("move_up"):
-    velocity.y -= 1
-  if Input.is_action_pressed("move_left"):
-    flip_horizontal(true)
-    change_sword_position(true)
-    velocity.x -= 1
+	var cursor_position = get_viewport().get_mouse_position()
+	weapon_sword.render_weapon(global_position)
 
-  if Input.is_action_pressed("move_right"):
-    flip_horizontal(false)
-    change_sword_position(false)
-    velocity.x += 1
+	if get_position() < cursor_position:
+		player.flip_h = false
+	else:
+		player.flip_h = true
 
+	# Processing user input
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
 
-  # Player sprinting
-  if Input.is_action_pressed("run"):
-    current_speed = run_speed
-    player_animation.speed_scale = 1.5
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
 
-  if Input.is_action_just_released("run"):
-    current_speed = walk_speed
-    player_animation.speed_scale = 1.00
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
 
-  # When the player has stopped pressing buttons/moving
-  if velocity.length() > 0:
-    velocity = velocity.normalized() * current_speed
-    player_animation.play()
-  else:
-    player_animation.stop()
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
 
-  position += velocity * delta
-  position = position.clamp(Vector2.ZERO, screen_size)
+	if Input.is_action_just_pressed("mouse_left"):
+		weapon_sword.use_weapon()
+
+	# When the player is moving
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * current_speed
+		position += velocity * delta
+		position = position.clamp(Vector2.ZERO, screen_size)
+		player.play()
+
+	# When the player has stopped pressing buttons/moving
+	else:
+		player.stop()
