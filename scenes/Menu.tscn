@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bugw2sjuaia8g"]
 
-[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_p3y4d"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_5jsdf"]
 
 [node name="Menu" type="Node2D"]
-script = ExtResource("1_p3y4d")
+script = ExtResource("1_5jsdf")
 
 [node name="PlayButton" type="Button" parent="."]
 texture_filter = 2
