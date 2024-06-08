@@ -17,6 +17,7 @@ var direction = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	print(screen_size)
 	print(player_attributes.attributes)
 	# weapon.change_weapon_position(get_position(), direction)
 
