@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hit
+
 # Player Specific Informa
 var current_speed = 200
 var walk_speed = 200
@@ -59,3 +61,8 @@ func _process(delta):
 	# When the player has stopped pressing buttons/moving
 	else:
 		player.stop()
+
+
+func _on_body_entered(body):
+	print("Player was hit")
+	hit.emit()

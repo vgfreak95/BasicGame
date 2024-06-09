@@ -704,7 +704,4 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 
 [node name="Player" parent="." instance=ExtResource("1_crrgl")]
 
-[node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(549, 311)
-
 [node name="SpawnerProjectile" parent="." instance=ExtResource("5_o4gr3")]
