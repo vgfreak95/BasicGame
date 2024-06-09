@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hit
+
 # Player Specific Informa
 var current_speed = 200
 var walk_speed = 200
@@ -17,6 +19,7 @@ var direction = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	print(screen_size)
 	print(player_attributes.attributes)
 	# weapon.change_weapon_position(get_position(), direction)
 
@@ -58,3 +61,8 @@ func _process(delta):
 	# When the player has stopped pressing buttons/moving
 	else:
 		player.stop()
+
+
+func _on_body_entered(body):
+	print("Player was hit")
+	hit.emit()
