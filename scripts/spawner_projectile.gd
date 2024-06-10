@@ -4,50 +4,42 @@ var screen_size
 var timer
 
 @export var projectile: PackedScene
-# Figure out how to get the player coords
+@export var max_speed: int = 300
+@export var min_speed: int = 100
 
 
 func spawn_projectile_on_border(width: int, height: int):
 	var instance = projectile.instantiate()
 	var locations = ["left", "right", "top", "bottom"]
 	var border = locations.pick_random()
+	var player = get_parent().get_node("Player") as Player
 
 	var x
 	var y
-	var angle
-	var direction
 
 	# Determine what border to spawn projectile on
 	if border == "top":
 		x = randi() % width
 		y = 0
-		direction = randf_range(225.0, 315.0)
 
 	elif border == "bottom":
 		x = randi() % width
 		y = height
-		direction = randf_range(45.0, 135.0)
 
 	elif border == "left":
 		x = 0
 		y = randi() % height
-		direction = randf_range(45.0, -45.0)
-		if direction < 0:
-			direction += 360.0
 
 	elif border == "right":
 		x = width
 		y = randi() % height
-		direction = randf_range(135.0, 225.0)
 
-	# Set the velocity towards the player
-
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-
-	instance.linear_velocity = velocity.rotated(direction)
+	# Point the instance projectile to the player
 	instance.position = Vector2(x, y)
-
+	var velocity = randi() % max_speed + min_speed
 	add_child(instance)
+	var direction = (player.global_position - instance.global_position).normalized()
+	instance.linear_velocity = direction * velocity
 
 
 # Called when the node enters the scene tree for the first time.
