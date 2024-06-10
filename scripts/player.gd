@@ -1,3 +1,4 @@
+class_name Player
 extends Area2D
 
 # Player Specific Informa
