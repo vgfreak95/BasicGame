@@ -1,12 +1,9 @@
 extends Area2D
 
-signal hit
-
 # Player Specific Informa
 var current_speed = 200
 var walk_speed = 200
 var run_speed = 400
-var screen_size
 var direction = 1
 
 @onready var player = $AnimatedPlayer2D
@@ -14,26 +11,22 @@ var direction = 1
 @onready var player_attributes = $AttributesComponent
 @onready var weapon_sword = $WeaponSword
 @onready var weapon_animation = $WeaponSword/AnimationPlayer
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	screen_size = get_viewport_rect().size
-	print(screen_size)
-	print(player_attributes.attributes)
-	# weapon.change_weapon_position(get_position(), direction)
+@onready var screen_size = get_viewport_rect().size
 
 
 func _process(delta):
 	var velocity = Vector2.ZERO
 
 	var cursor_position = get_viewport().get_mouse_position()
-	weapon_sword.render_weapon(global_position)
 
-	if get_position() < cursor_position:
-		player.flip_h = false
-	else:
-		player.flip_h = true
+	# weapon_sword.render_weapon(global_position)
+
+	# Don't rotate player when weapon is used
+	if not weapon_animation.is_playing():
+		if get_position() < cursor_position:
+			player.flip_h = false
+		else:
+			player.flip_h = true
 
 	# Processing user input
 	if Input.is_action_pressed("move_down"):
@@ -64,5 +57,4 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	print("Player was hit")
-	hit.emit()
+	pass  # Replace with function body.
