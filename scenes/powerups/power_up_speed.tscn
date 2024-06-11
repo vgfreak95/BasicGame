@@ -9,6 +9,7 @@ height = 16.0
 
 [node name="PowerUpSpeed" type="Area2D" groups=["powerup"]]
 scale = Vector2(3, 3)
+collision_layer = 4
 script = ExtResource("1_tlekq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -18,3 +19,5 @@ texture = ExtResource("1_tlms4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_glucg")
 debug_color = Color(3.80233e-06, 0.645197, 0.265258, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

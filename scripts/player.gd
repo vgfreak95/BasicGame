@@ -1,5 +1,5 @@
 class_name Player
-extends Area2D
+extends CharacterBody2D
 
 # Player Specific Informa
 var current_speed = 200
@@ -16,6 +16,11 @@ var direction = 1
 
 @onready var health_bar: ProgressBar = $ProgressBar
 @onready var health: HPComponent = $HPComponent
+
+
+func take_damage(damage):
+	health.lose_health(damage)
+	health_bar.value = health.current_health
 
 
 func _ready():
@@ -62,25 +67,19 @@ func _process(delta):
 		player.stop()
 
 
-# For enemy entities
-func _on_body_entered(body):
-	if body as Projectile != null:
-		health.take_damage()
-		health_bar.value = health.current_health
-		# TODO: Handle Death scenario
+func _on_projectile_hit(damage):
+	take_damage(damage)
 
 
-# For Powerups
-func _on_area_entered(area: Area2D):
-	if area as PowerUpSpeed != null:
-		current_speed = run_speed
-		var duration_timer = Timer.new()
-		duration_timer.wait_time = 5.0
-		add_child(duration_timer)
-		duration_timer.one_shot = true
-		duration_timer.start()
-		duration_timer.timeout.connect(_timer_power_up_timeout)
-		area.queue_free()
+func _on_power_up_pickup(pickup):
+	current_speed = run_speed
+	var duration_timer = Timer.new()
+	duration_timer.wait_time = 5.0
+	add_child(duration_timer)
+	duration_timer.one_shot = true
+	duration_timer.start()
+	duration_timer.timeout.connect(_timer_power_up_timeout)
+	pickup.queue_free()
 
 
 func _timer_power_up_timeout():
