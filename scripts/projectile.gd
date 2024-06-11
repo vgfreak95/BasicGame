@@ -1,3 +1,4 @@
+class_name Projectile
 extends RigidBody2D
 
 var screen_size
@@ -15,4 +16,3 @@ func _process(delta):
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
-	pass  # Replace with function body.

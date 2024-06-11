@@ -14,13 +14,18 @@ var direction = 1
 @onready var weapon_animation = $WeaponSword/AnimationPlayer
 @onready var screen_size = get_viewport_rect().size
 
+@onready var health_bar: ProgressBar = $ProgressBar
+@onready var health: HPComponent = $HPComponent
+
+
+func _ready():
+	health_bar.value = health.max_health
+
 
 func _process(delta):
 	var velocity = Vector2.ZERO
 
 	var cursor_position = get_viewport().get_mouse_position()
-
-	# weapon_sword.render_weapon(global_position)
 
 	# Don't rotate player when weapon is used
 	if not weapon_animation.is_playing():
@@ -58,4 +63,8 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	pass  # Replace with function body.
+	var projectile = body as Projectile
+	if projectile != null:
+		health.take_damage()
+		health_bar.value = health.current_health
+		# TODO: Handle Death scenario

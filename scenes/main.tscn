@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dy3yojuhptsoi"]
+[gd_scene load_steps=11 format=3 uid="uid://dy3yojuhptsoi"]
 
 [ext_resource type="PackedScene" uid="uid://dtuy5eo3depk1" path="res://scenes/player.tscn" id="1_crrgl"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_vpyjn"]
@@ -692,6 +692,9 @@ texture = ExtResource("2_4jmda")
 sources/1 = SubResource("TileSetAtlasSource_g5mmg")
 sources/0 = SubResource("TileSetAtlasSource_dl82a")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv82k"]
+bg_color = Color(0, 0.870588, 0.545098, 1)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_vpyjn")
 metadata/_edit_horizontal_guides_ = [672.0]
@@ -706,12 +709,33 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 [node name="Player" parent="." instance=ExtResource("1_crrgl")]
 position = Vector2(581, 319)
 
+[node name="ProgressBar" type="ProgressBar" parent="Player"]
+custom_minimum_size = Vector2(50, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -33.0
+offset_top = 48.0
+offset_right = 67.0
+offset_bottom = 75.0
+grow_horizontal = 0
+scale = Vector2(0.669082, 0.567858)
+theme_override_styles/fill = SubResource("StyleBoxFlat_iv82k")
+show_percentage = false
+
 [node name="SpawnerProjectile" parent="." instance=ExtResource("5_o4gr3")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="pause" parent="CanvasLayer" instance=ExtResource("5_6a3fa")]
 
-[node name="stopwatch" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="stopwatch" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 22.0
+offset_right = -8.0
+offset_bottom = 45.0
+grow_horizontal = 2
+scale = Vector2(2.42547, 2.14286)
