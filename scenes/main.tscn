@@ -730,6 +730,7 @@ show_percentage = false
 [node name="pause" parent="CanvasLayer" instance=ExtResource("5_6a3fa")]
 
 [node name="stopwatch" type="Label" parent="CanvasLayer"]
+
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
