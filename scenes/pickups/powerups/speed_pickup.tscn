@@ -1,20 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://dynihif113bdb"]
 
-[ext_resource type="Script" path="res://scripts/pickups/powerups/power_up_speed.gd" id="1_s6rht"]
-[ext_resource type="Texture2D" uid="uid://duwg71xsi7qfo" path="res://art/0x72_DungeonTilesetII_v1.7/frames/flask_yellow.png" id="2_5pd88"]
+[ext_resource type="Script" path="res://scripts/pickups/powerups/speed_pickup.gd" id="1_xjtrv"]
+[ext_resource type="Texture2D" uid="uid://duwg71xsi7qfo" path="res://art/0x72_DungeonTilesetII_v1.7/frames/flask_yellow.png" id="2_uws6s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_glucg"]
 radius = 5.0
 height = 16.0
 
-[node name="PowerUpSpeed" type="Area2D" groups=["powerup"]]
+[node name="SpeedPickup" type="Area2D" groups=["powerup"]]
 scale = Vector2(3, 3)
 collision_layer = 4
-script = ExtResource("1_s6rht")
+script = ExtResource("1_xjtrv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_5pd88")
+texture = ExtResource("2_uws6s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_glucg")
