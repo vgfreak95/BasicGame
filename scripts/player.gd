@@ -62,9 +62,26 @@ func _process(delta):
 		player.stop()
 
 
+# For enemy entities
 func _on_body_entered(body):
-	var projectile = body as Projectile
-	if projectile != null:
+	if body as Projectile != null:
 		health.take_damage()
 		health_bar.value = health.current_health
 		# TODO: Handle Death scenario
+
+
+# For Powerups
+func _on_area_entered(area: Area2D):
+	if area as PowerUpSpeed != null:
+		current_speed = run_speed
+		var duration_timer = Timer.new()
+		duration_timer.wait_time = 5.0
+		add_child(duration_timer)
+		duration_timer.one_shot = true
+		duration_timer.start()
+		duration_timer.timeout.connect(_timer_power_up_timeout)
+		area.queue_free()
+
+
+func _timer_power_up_timeout():
+	current_speed = walk_speed

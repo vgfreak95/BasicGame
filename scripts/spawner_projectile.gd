@@ -55,7 +55,7 @@ func _process(delta):
 
 
 func _on_timer_timeout():
-	if get_parent().time >= 720: #Kill Screen
+	if get_parent().time >= 720:  #Kill Screen
 		timer.wait_time = 0.05
 	elif get_parent().time >= 480:
 		timer.wait_time = 0.10
