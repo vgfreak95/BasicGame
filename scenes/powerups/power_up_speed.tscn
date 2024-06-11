@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dynihif113bdb"]
+
+[ext_resource type="Script" path="res://scripts/power_up_speed.gd" id="1_tlekq"]
+[ext_resource type="Texture2D" uid="uid://duwg71xsi7qfo" path="res://art/0x72_DungeonTilesetII_v1.7/frames/flask_yellow.png" id="1_tlms4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_glucg"]
+radius = 5.0
+height = 16.0
+
+[node name="PowerUpSpeed" type="Area2D" groups=["powerup"]]
+scale = Vector2(3, 3)
+script = ExtResource("1_tlekq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_tlms4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_glucg")
+debug_color = Color(3.80233e-06, 0.645197, 0.265258, 0.42)
