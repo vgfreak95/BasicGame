@@ -7,7 +7,7 @@
 radius = 5.0
 height = 16.0
 
-[node name="SpeedPickup" type="Area2D" groups=["powerup"]]
+[node name="SpeedPickup" type="Area2D" groups=["pickup"]]
 scale = Vector2(3, 3)
 collision_layer = 4
 script = ExtResource("1_xjtrv")

@@ -24,7 +24,10 @@ var direction = 1
 
 func take_damage(damage):
 	health.lose_health(damage)
-	health_bar.value = health.current_health
+
+
+func heal(amount):
+	health.restore_health(amount)
 
 
 func _ready():
@@ -39,6 +42,7 @@ func _process(delta):
 
 	# Bar to timer
 	speed_bar.value = speed_powerup_timer.time_left * 20
+	health_bar.value = health.current_health
 
 	# Don't rotate player when weapon is used
 	if not weapon_animation.is_playing():

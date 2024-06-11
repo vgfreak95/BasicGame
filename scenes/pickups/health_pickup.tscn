@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt4cvp8qaci3k"]
+
+[ext_resource type="Script" path="res://scenes/pickups/health_pickup.gd" id="1_reqxy"]
+[ext_resource type="Texture2D" uid="uid://djdb645hae1jm" path="res://art/0x72_DungeonTilesetII_v1.7/frames/flask_green.png" id="3_vofqh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2182h"]
+radius = 5.66667
+height = 18.0
+
+[node name="HealthPickup" type="Area2D" groups=["pickup"]]
+scale = Vector2(3, 3)
+collision_layer = 4
+script = ExtResource("1_reqxy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_vofqh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2182h")
+debug_color = Color(1.82897e-06, 0.636287, 0.40678, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
