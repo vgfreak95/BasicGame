@@ -79,17 +79,6 @@ func _on_projectile_hit(damage):
 	take_damage(damage)
 
 
-func _on_power_up_pickup(pickup):
-	current_speed = run_speed
-	speed_powerup_timer.wait_time = 5.0
-
-	if not is_speed_powerup_active:
-		speed_powerup_timer.one_shot = true
-		speed_powerup_timer.start()
-		speed_powerup_timer.timeout.connect(_timer_power_up_timeout)
-		pickup.queue_free()
-
-
 func _timer_power_up_timeout():
 	current_speed = walk_speed
 	is_speed_powerup_active = false

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2svwrlx4f8qu"]
+
+[ext_resource type="Script" path="res://scripts/pickups/some_pickup.gd" id="1_nrouo"]
+[ext_resource type="Texture2D" uid="uid://dowo56u8tyaru" path="res://art/0x72_DungeonTilesetII_v1.7/frames/flask_big_blue.png" id="2_5j8kp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kwoc4"]
+radius = 7.0
+
+[node name="SomePickup" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 5
+script = ExtResource("1_nrouo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kwoc4")
+debug_color = Color(2.02149e-06, 0.635314, 0.418682, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5j8kp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
