@@ -4,10 +4,9 @@ extends Node2D
 @export var max_health: int = 100
 @export var min_health: int = 0
 @export var current_health: int = 100
-@export var damage: int = 10
 
 
-func take_damage():
+func lose_health(damage):
 	current_health -= damage
 	if current_health <= 0:
 		current_health = 0

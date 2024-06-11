@@ -12,7 +12,8 @@ func spawn_projectile_on_border(width: int, height: int):
 	var instance = projectile.instantiate()
 	var locations = ["left", "right", "top", "bottom"]
 	var border = locations.pick_random()
-	var player = get_parent().get_node("Player") as Player
+	var player = get_parent().get_node("Player") as Player  # Create a callable for the player's method
+	instance.hit.connect(player._on_projectile_hit)
 
 	var x
 	var y
@@ -36,10 +37,11 @@ func spawn_projectile_on_border(width: int, height: int):
 
 	# Point the instance projectile to the player
 	instance.position = Vector2(x, y)
-	var velocity = randi() % max_speed + min_speed
+	var speed = randi() % max_speed + min_speed
 	add_child(instance)
+	instance.speed = speed
 	var direction = (player.global_position - instance.global_position).normalized()
-	instance.linear_velocity = direction * velocity
+	instance.velocity = direction
 
 
 # Called when the node enters the scene tree for the first time.

@@ -1,18 +1,27 @@
 class_name Projectile
-extends RigidBody2D
+extends Area2D
 
-var screen_size
+signal hit
+
+@onready var screen_size = get_viewport_rect().size
+
+@export var speed = 200
+@export var velocity = Vector2()
+@export var damage = 10
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	screen_size = get_viewport_rect().size
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	# Move the projectile
+	position += velocity * speed * delta
+
+	#TODO: Add Dampening here later
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+
+func _on_body_entered(body: Node2D):
+	if body as Player != null:
+		print("From projectile: Hit PLAYER")
+		emit_signal("hit", damage)

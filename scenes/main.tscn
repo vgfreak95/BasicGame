@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_vpyjn"]
 [ext_resource type="Texture2D" uid="uid://bdxvvp5rtdda" path="res://art/0x72_DungeonTilesetII_v1.7/atlas_floor-16x16.png" id="2_4jmda"]
 [ext_resource type="Texture2D" uid="uid://rqfdhx0qcris" path="res://art/0x72_DungeonTilesetII_v1.7/0x72_DungeonTilesetII_v1.7.png" id="2_d3xfw"]
-[ext_resource type="PackedScene" path="res://scenes/pause.tscn" id="5_6a3fa"]
+[ext_resource type="PackedScene" uid="uid://b4bisxq0i7rd2" path="res://scenes/pause.tscn" id="5_6a3fa"]
 [ext_resource type="PackedScene" uid="uid://60ytjmgodcg7" path="res://scenes/spawners/spawner_projectile.tscn" id="5_o4gr3"]
 [ext_resource type="PackedScene" uid="uid://d0f5k77jk3xvr" path="res://scenes/spawners/spawner_power_up.tscn" id="6_q0b0p"]
 

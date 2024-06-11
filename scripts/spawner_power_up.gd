@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var power_up: PackedScene
+@export var power_up_to_use: PackedScene
 @export var max_powerups_on_screen = 3
 @onready var screen_size = get_viewport_rect().size
 
@@ -14,13 +14,15 @@ func _ready():
 func create_power_up():
 	# TODO: Add random power up choice here
 
-	var power_up_instance = power_up.instantiate() as PowerUpSpeed
+	var power_up = power_up_to_use.instantiate() as PowerUpSpeed
+	var player = get_parent().get_node("Player") as Player  # Create a callable for the player's method
+	power_up.pickup.connect(player._on_power_up_pickup.bind(power_up))
 
 	var x = randi() % int(screen_size.x)
 	var y = randi() % int(screen_size.y)
 
-	add_child(power_up_instance)
-	power_up_instance.position = Vector2(x, y)
+	add_child(power_up)
+	power_up.position = Vector2(x, y)
 
 
 func _on_timer_timeout():

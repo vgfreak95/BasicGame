@@ -118,7 +118,8 @@ _data = {
 "right_swing_down": SubResource("Animation_e8rgf")
 }
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_t3s27")
 metadata/_edit_lock_ = true
 
@@ -155,6 +156,3 @@ libraries = {
 }
 
 [node name="HPComponent" parent="." instance=ExtResource("8_42lkv")]
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
