@@ -16,5 +16,5 @@ func _process(delta):
 
 func update_timer(delta):
 	time += delta
-	$stopwatch.text = String.num(time, 2)
-	$stopwatch.show()
+	$CanvasLayer/stopwatch.text = String.num(time, 2)
+	$CanvasLayer/stopwatch.show()

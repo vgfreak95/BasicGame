@@ -712,6 +712,6 @@ position = Vector2(581, 319)
 
 [node name="pause" parent="CanvasLayer" instance=ExtResource("5_6a3fa")]
 
-[node name="stopwatch" type="Label" parent="."]
+[node name="stopwatch" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
