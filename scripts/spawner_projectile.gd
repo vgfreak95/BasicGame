@@ -1,7 +1,7 @@
 extends Node2D
 
 var screen_size
-var timer
+@onready var timer: Timer = $Timer
 
 @export var projectile: PackedScene
 @export var max_speed: int = 300
@@ -46,7 +46,6 @@ func spawn_projectile_on_border(width: int, height: int):
 func _ready():
 	screen_size = get_viewport_rect().size
 	print(screen_size)
-	timer = $Timer
 	timer.start()
 
 
@@ -56,4 +55,14 @@ func _process(delta):
 
 
 func _on_timer_timeout():
+	if get_parent().time >= 720: #Kill Screen
+		timer.wait_time = 0.05
+	elif get_parent().time >= 480:
+		timer.wait_time = 0.10
+	elif get_parent().time >= 360:
+		timer.wait_time = 0.15
+	elif get_parent().time >= 240:
+		timer.wait_time = 0.20
+	elif get_parent().time >= 120:
+		timer.wait_time = 0.25
 	spawn_projectile_on_border(screen_size.x, screen_size.y)
