@@ -14,8 +14,12 @@ var direction = 1
 @onready var weapon_animation = $WeaponSword/AnimationPlayer
 @onready var screen_size = get_viewport_rect().size
 
-@onready var health_bar: ProgressBar = $ProgressBar
+@onready var health_bar: ProgressBar = $VBoxContainer/HealthBar
+@onready var speed_bar: ProgressBar = $VBoxContainer/SpeedBar
 @onready var health: HPComponent = $HPComponent
+
+@onready var speed_powerup_timer: Timer = Timer.new()
+@onready var is_speed_powerup_active = false
 
 
 func take_damage(damage):
@@ -25,12 +29,16 @@ func take_damage(damage):
 
 func _ready():
 	health_bar.value = health.max_health
+	add_child(speed_powerup_timer)
 
 
 func _process(delta):
 	var velocity = Vector2.ZERO
 
 	var cursor_position = get_viewport().get_mouse_position()
+
+	# Bar to timer
+	speed_bar.value = speed_powerup_timer.time_left * 20
 
 	# Don't rotate player when weapon is used
 	if not weapon_animation.is_playing():
@@ -73,14 +81,15 @@ func _on_projectile_hit(damage):
 
 func _on_power_up_pickup(pickup):
 	current_speed = run_speed
-	var duration_timer = Timer.new()
-	duration_timer.wait_time = 5.0
-	add_child(duration_timer)
-	duration_timer.one_shot = true
-	duration_timer.start()
-	duration_timer.timeout.connect(_timer_power_up_timeout)
-	pickup.queue_free()
+	speed_powerup_timer.wait_time = 5.0
+
+	if not is_speed_powerup_active:
+		speed_powerup_timer.one_shot = true
+		speed_powerup_timer.start()
+		speed_powerup_timer.timeout.connect(_timer_power_up_timeout)
+		pickup.queue_free()
 
 
 func _timer_power_up_timeout():
 	current_speed = walk_speed
+	is_speed_powerup_active = false

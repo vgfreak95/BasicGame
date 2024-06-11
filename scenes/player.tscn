@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtuy5eo3depk1"]
+[gd_scene load_steps=17 format=3 uid="uid://dtuy5eo3depk1"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_t3s27"]
 [ext_resource type="Texture2D" uid="uid://dd0qh14i2evt1" path="res://art/0x72_DungeonTilesetII_v1.7/frames/knight_f_run_anim_f0.png" id="2_6jwo0"]
@@ -118,6 +118,12 @@ _data = {
 "right_swing_down": SubResource("Animation_e8rgf")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoxby"]
+bg_color = Color(0.24445, 0.801036, 0.481649, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tsauo"]
+bg_color = Color(0.941176, 0.6, 0, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_t3s27")
@@ -156,3 +162,22 @@ libraries = {
 }
 
 [node name="HPComponent" parent="." instance=ExtResource("8_42lkv")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = -26.0
+offset_top = 42.0
+offset_right = 24.0
+offset_bottom = 82.0
+theme_override_constants/separation = 1
+
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_uoxby")
+show_percentage = false
+
+[node name="SpeedBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_tsauo")
+show_percentage = false
