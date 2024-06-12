@@ -8,6 +8,7 @@ var run_speed = 400
 var direction = 1
 
 @onready var player = $AnimatedPlayer2D
+@onready var animation_player = $AnimationPlayer
 @onready var collision = $CollisionShape2D
 @onready var player_attributes = $AttributesComponent
 @onready var weapon_sword = $WeaponSword
@@ -20,6 +21,7 @@ var direction = 1
 
 @onready var speed_powerup_timer: Timer = Timer.new()
 @onready var is_speed_powerup_active = false
+@onready var is_movement_locked = false
 
 
 func take_damage(damage):
@@ -30,26 +32,17 @@ func heal(amount):
 	health.restore_health(amount)
 
 
-func _ready():
-	health_bar.value = health.max_health
-	add_child(speed_powerup_timer)
+func lock_movement():
+	is_movement_locked = true
 
 
-func _process(delta):
+func unlock_movement():
+	is_movement_locked = false
+
+
+func move_player(delta):
 	var velocity = Vector2.ZERO
-
 	var cursor_position = get_viewport().get_mouse_position()
-
-	# Bar to timer
-	speed_bar.value = speed_powerup_timer.time_left * 20
-	health_bar.value = health.current_health
-
-	# Don't rotate player when weapon is used
-	if not weapon_animation.is_playing():
-		if get_position() < cursor_position:
-			player.flip_h = false
-		else:
-			player.flip_h = true
 
 	# Processing user input
 	if Input.is_action_pressed("move_down"):
@@ -64,19 +57,35 @@ func _process(delta):
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 
-	if Input.is_action_just_pressed("mouse_left"):
-		weapon_sword.use_weapon()
+	player.flip_h = false if position < cursor_position else true
 
 	# When the player is moving
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * current_speed
 		position += velocity * delta
 		position = position.clamp(Vector2.ZERO, screen_size)
-		player.play()
+		player.play("walk")
 
 	# When the player has stopped pressing buttons/moving
 	else:
 		player.stop()
+
+
+func update_bars():
+	# Bar to timer
+	speed_bar.value = speed_powerup_timer.time_left * 20
+	health_bar.value = health.current_health
+
+
+func _ready():
+	health_bar.value = health.max_health
+	add_child(speed_powerup_timer)
+
+
+func _process(delta):
+	if not is_movement_locked:
+		move_player(delta)
+		update_bars()
 
 
 func _on_projectile_hit(damage):
@@ -86,3 +95,12 @@ func _on_projectile_hit(damage):
 func _timer_power_up_timeout():
 	current_speed = walk_speed
 	is_speed_powerup_active = false
+
+
+func _on_hp_component_on_death():
+	lock_movement()
+	player.stop()
+	animation_player.play("death")
+	await animation_player.animation_finished
+
+	# TODO: Emit a signal to the that the player is dead
