@@ -100,6 +100,7 @@ func _timer_power_up_timeout():
 func _on_hp_component_on_death():
 	lock_movement()
 	player.stop()
+	player.flip_h = false
 	animation_player.play("death")
 	await animation_player.animation_finished
 
