@@ -77,6 +77,11 @@ func update_bars():
 	health_bar.value = health.current_health
 
 
+func empty_bars():
+	speed_bar.value = 0
+	health_bar.value = 0
+
+
 func _ready():
 	health_bar.value = health.max_health
 	add_child(speed_powerup_timer)
@@ -98,7 +103,9 @@ func _timer_power_up_timeout():
 
 
 func _on_hp_component_on_death():
+	collision.queue_free()
 	lock_movement()
+	empty_bars()
 	player.stop()
 	player.flip_h = false
 	animation_player.play("death")
