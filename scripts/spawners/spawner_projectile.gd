@@ -36,6 +36,8 @@ func spawn_projectile_on_border(width: int, height: int):
 		y = randi() % height
 
 	# Point the instance projectile to the player
+	var scale_vector = randi() % 3 + 1
+	instance.scale = Vector2(scale_vector, scale_vector)
 	instance.position = Vector2(x, y)
 	var speed = randi() % max_speed + min_speed
 	add_child(instance)

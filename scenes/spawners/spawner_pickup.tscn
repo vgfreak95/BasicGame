@@ -6,7 +6,7 @@
 
 [node name="SpawnerPickup" type="Node2D"]
 script = ExtResource("1_87dpc")
-pickups_to_use = [ExtResource("2_rjd5g"), ExtResource("2_of7u8")]
+pickups_to_use = Array[PackedScene]([ExtResource("2_rjd5g"), ExtResource("2_of7u8")])
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

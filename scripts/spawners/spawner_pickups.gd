@@ -13,12 +13,9 @@ func _ready():
 
 
 func create_power_up():
-	# TODO: Add random power up choice here
-
-	# var power_up = power_up_to_use.instantiate()
-	# var player = get_parent().get_node("Player") as Player  # Create a callable for the player's method
+	var spawn_pickup_time: float = randf_range(8.0, 15.0)
+	timer.wait_time = spawn_pickup_time
 	var pickup = pickups_to_use.pick_random().instantiate()
-	# power_up.pickup.connect(player._on_power_up_pickup.bind(power_up))
 
 	var x = randi() % int(screen_size.x)
 	var y = randi() % int(screen_size.y)
