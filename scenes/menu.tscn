@@ -41,7 +41,7 @@ offset_top = -23.0
 offset_right = 73.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "v0.0.1-proto"
+text = "v0.0.2-proto"
 horizontal_alignment = 1
 vertical_alignment = 1
 
