@@ -14,31 +14,6 @@ func spawn_projectile_on_border(width: int, height: int):
 	var border = locations.pick_random()
 	var player = get_parent().get_node("Player") as Player  # Create a callable for the player's method
 	instance.hit.connect(player._on_projectile_hit)
-
-	var x
-	var y
-
-	# Determine what border to spawn projectile on
-	if border == "top":
-		x = randi() % width
-		y = 0
-
-	elif border == "bottom":
-		x = randi() % width
-		y = height
-
-	elif border == "left":
-		x = 0
-		y = randi() % height
-
-	elif border == "right":
-		x = width
-		y = randi() % height
-
-	# Point the instance projectile to the player
-	var scale_vector = randi() % 3 + 1
-	instance.scale = Vector2(scale_vector, scale_vector)
-	instance.position = Vector2(x, y)
 	var speed = randi() % max_speed + min_speed
 	add_child(instance)
 	instance.speed = speed
