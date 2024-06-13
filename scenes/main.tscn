@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dy3yojuhptsoi"]
+[gd_scene load_steps=12 format=3 uid="uid://dy3yojuhptsoi"]
 
 [ext_resource type="PackedScene" uid="uid://dtuy5eo3depk1" path="res://scenes/player.tscn" id="1_crrgl"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_vpyjn"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://rqfdhx0qcris" path="res://art/0x72_DungeonTilesetII_v1.7/0x72_DungeonTilesetII_v1.7.png" id="2_d3xfw"]
 [ext_resource type="PackedScene" uid="uid://b4bisxq0i7rd2" path="res://scenes/pause.tscn" id="5_6a3fa"]
 [ext_resource type="PackedScene" uid="uid://60ytjmgodcg7" path="res://scenes/spawners/spawner_projectile.tscn" id="5_o4gr3"]
-[ext_resource type="PackedScene" uid="uid://d0f5k77jk3xvr" path="res://scenes/spawners/spawner_pickup.tscn" id="6_q0b0p"]
+[ext_resource type="PackedScene" uid="uid://blyuk285nmi8y" path="res://scenes/gameover.tscn" id="6_5yrd0"]
+[ext_resource type="PackedScene" path="res://scenes/spawners/spawner_pickup.tscn" id="6_q0b0p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dl82a"]
 texture = ExtResource("2_d3xfw")
@@ -707,6 +708,15 @@ position = Vector2(581, 319)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="pause" parent="CanvasLayer" instance=ExtResource("5_6a3fa")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -36.0
+offset_right = -46.0
+offset_bottom = -36.0
 
 [node name="stopwatch" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
@@ -718,6 +728,17 @@ offset_right = -8.0
 offset_bottom = 45.0
 grow_horizontal = 2
 scale = Vector2(2.42547, 2.14286)
+
+[node name="gameover" parent="CanvasLayer" instance=ExtResource("6_5yrd0")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -36.0
+offset_right = -46.0
+offset_bottom = -36.0
 
 [node name="PowerUps" type="Node" parent="."]
 

@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://blyuk285nmi8y"]
+
+[ext_resource type="Script" path="res://scripts/gameover.gd" id="1_6ea10"]
+
+[node name="gameover" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ea10")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="score" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Score: 0"
+
+[node name="restart" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="quit" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]
