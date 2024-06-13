@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var gos = $CanvasLayer/gameover
+@onready var gameover_screen = $CanvasLayer/gameover
 
 
 var player = null
@@ -28,7 +28,7 @@ func update_timer(delta):
 
 func gameover():
 	print("gameover")
-	gos._set_score(time)
+	gameover_screen._set_score(time)
 	#gos._set_highscore(time)
-	gos.visible = true
+	gameover_screen.visible = true
 	get_tree().paused = true
