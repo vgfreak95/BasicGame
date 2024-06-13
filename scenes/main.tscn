@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b4bisxq0i7rd2" path="res://scenes/pause.tscn" id="5_6a3fa"]
 [ext_resource type="PackedScene" uid="uid://60ytjmgodcg7" path="res://scenes/spawners/spawner_projectile.tscn" id="5_o4gr3"]
 [ext_resource type="PackedScene" uid="uid://blyuk285nmi8y" path="res://scenes/gameover.tscn" id="6_5yrd0"]
-[ext_resource type="PackedScene" path="res://scenes/spawners/spawner_pickup.tscn" id="6_q0b0p"]
+[ext_resource type="PackedScene" uid="uid://d0f5k77jk3xvr" path="res://scenes/spawners/spawner_pickup.tscn" id="6_q0b0p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dl82a"]
 texture = ExtResource("2_d3xfw")

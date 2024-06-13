@@ -1,5 +1,8 @@
 extends Node2D
 
+var flag = 120
+
+
 var screen_size
 @onready var timer: Timer = $Timer
 
@@ -60,14 +63,8 @@ func _process(delta):
 
 
 func _on_timer_timeout():
-	if get_parent().time >= 720:  #Kill Screen
-		timer.wait_time = 0.05
-	elif get_parent().time >= 480:
-		timer.wait_time = 0.10
-	elif get_parent().time >= 360:
-		timer.wait_time = 0.15
-	elif get_parent().time >= 240:
-		timer.wait_time = 0.20
-	elif get_parent().time >= 120:
-		timer.wait_time = 0.25
+	if flag <= get_parent().time:
+		flag = flag + 120.0
+		timer.wait_time = timer.wait_time - 0.05
+			
 	spawn_projectile_on_border(screen_size.x, screen_size.y)
