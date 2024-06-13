@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal on_death
+
 # Player Specific Informa
 var current_speed = 200
 var walk_speed = 200
@@ -22,6 +24,7 @@ var direction = 1
 @onready var speed_powerup_timer: Timer = Timer.new()
 @onready var is_speed_powerup_active = false
 @onready var is_movement_locked = false
+
 
 
 func take_damage(damage):
@@ -110,5 +113,6 @@ func _on_hp_component_on_death():
 	player.flip_h = false
 	animation_player.play("death")
 	await animation_player.animation_finished
+	emit_signal("on_death")
 
 	# TODO: Emit a signal to the that the player is dead
