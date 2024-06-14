@@ -20,11 +20,11 @@ var direction = 1
 @onready var health_bar: ProgressBar = $VBoxContainer/HealthBar
 @onready var speed_bar: ProgressBar = $VBoxContainer/SpeedBar
 @onready var health: HPComponent = $HPComponent
+@onready var particles: CPUParticles2D = $CPUParticles2D
 
 @onready var speed_powerup_timer: Timer = Timer.new()
 @onready var is_speed_powerup_active = false
 @onready var is_movement_locked = false
-
 
 
 func take_damage(damage):
@@ -66,12 +66,14 @@ func move_player(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * current_speed
 		position += velocity * delta
+		particles.emitting = true
 		position = position.clamp(Vector2.ZERO, screen_size)
 		player.play("walk")
 
 	# When the player has stopped pressing buttons/moving
 	else:
 		player.stop()
+		particles.emitting = false
 
 
 func update_bars():
@@ -106,13 +108,11 @@ func _timer_power_up_timeout():
 
 
 func _on_hp_component_on_death():
+	emit_signal("on_death")
 	collision.queue_free()
 	lock_movement()
 	empty_bars()
 	player.stop()
 	player.flip_h = false
+	z_index = 2
 	animation_player.play("death")
-	await animation_player.animation_finished
-	emit_signal("on_death")
-
-	# TODO: Emit a signal to the that the player is dead

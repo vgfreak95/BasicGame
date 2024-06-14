@@ -149,12 +149,13 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uq3kf"]
 radius = 16.0
-height = 54.0
+height = 44.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_t3s27")
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="AnimatedPlayer2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -207,14 +208,30 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_tsauo")
 show_percentage = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
 root_node = NodePath("../AnimatedPlayer2D")
 libraries = {
 "": SubResource("AnimationLibrary_l1gxi")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_uq3kf")
 debug_color = Color(0.53926, 0.567818, 0, 0.42)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(0, 25.53)
+emitting = false
+amount = 3
+lifetime = 0.2
+randomness = 0.05
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector2(-45, 0)
+angular_velocity_min = -29.09
+angular_velocity_max = 29.09
+scale_amount_min = 4.0
+scale_amount_max = 8.0
 
 [connection signal="on_death" from="HPComponent" to="." method="_on_hp_component_on_death"]
