@@ -15,6 +15,12 @@ func _process(delta):
 func on_pickup(player):
 	player.current_speed = player.run_speed
 	player.speed_powerup_timer.wait_time = 5.0
+	player.particles.color = Color(
+		240.0,
+		153.0,
+		0,
+		1.0,
+	)
 
 	if not player.is_speed_powerup_active:
 		player.speed_powerup_timer.one_shot = true

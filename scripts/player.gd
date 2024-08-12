@@ -105,6 +105,7 @@ func _on_projectile_hit(damage):
 func _timer_power_up_timeout():
 	current_speed = walk_speed
 	is_speed_powerup_active = false
+	particles.color = Color(1.0, 1.0, 1.0, 1.0)
 
 
 func _on_hp_component_on_death():
