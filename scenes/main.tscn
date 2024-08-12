@@ -743,7 +743,7 @@ offset_bottom = -36.0
 [node name="PowerUps" type="Node" parent="."]
 
 [node name="TileMap" type="TileMap" parent="."]
-z_index = -1
+z_index = -2
 scale = Vector2(3, 3)
 tile_set = SubResource("TileSet_o2q8f")
 format = 2

@@ -2,7 +2,6 @@ extends Node2D
 
 var flag = 120
 
-
 var screen_size
 @onready var timer: Timer = $Timer
 
@@ -66,5 +65,5 @@ func _on_timer_timeout():
 	if flag <= get_parent().time:
 		flag = flag + 120.0
 		timer.wait_time = timer.wait_time - 0.05
-			
+
 	spawn_projectile_on_border(screen_size.x, screen_size.y)
